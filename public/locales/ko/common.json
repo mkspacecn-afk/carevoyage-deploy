@@ -1,0 +1,15 @@
+{
+  "common": {
+    "bookNow": "예약하기",
+    "consultation": "상담 예약",
+    "signIn": "로그인",
+    "services": "의료 서비스",
+    "hospitals": "제휴 병원",
+    "about": "회사 소개",
+    "contact": "문의하기"
+  },
+  "hero": {
+    "title": "당신의 건강 여정은 여기서 시작됩니다",
+    "subtitle": "맞춤형 서비스로 중국의 세계적 수준의 의료를 경험핳세요."
+  }
+}
