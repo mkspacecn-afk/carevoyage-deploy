@@ -1,4 +1,4 @@
-# Railway Docker deployment - Standalone mode
+# Railway Docker deployment
 FROM node:18-slim
 
 WORKDIR /app
@@ -29,6 +29,5 @@ EXPOSE 3000
 ENV PORT=3000
 ENV NODE_ENV=production
 
-# Start the app (standalone mode)
-WORKDIR /app/.next/standalone
-CMD ["node", "server.js"]
+# Start the app
+CMD ["npm", "start"]
