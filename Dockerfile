@@ -12,12 +12,12 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy all files including prisma
+# Copy all files
 COPY . .
 
-# Generate Prisma client (with dummy DB URL for build)
+# Generate Prisma client
 ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
-RUN npx prisma generate --schema=./prisma/schema.prisma
+RUN npx prisma generate
 
 # Build the app
 RUN npm run build
