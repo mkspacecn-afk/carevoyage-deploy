@@ -1,4 +1,4 @@
-# Railway Docker deployment - Skip Prisma generate, use pre-built client
+# Railway Docker deployment - Standalone mode
 FROM node:18-slim
 
 WORKDIR /app
@@ -12,14 +12,18 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy all files (includes pre-generated Prisma client)
+# Copy all files
 COPY . .
 
-# Build the app (without Prisma generate)
+# Build the app (standalone output)
 RUN npm run build
+
+# Copy static files to standalone
+RUN cp -r public .next/standalone/ 2>/dev/null || true
+RUN cp -r .next/static .next/standalone/.next/ 2>/dev/null || true
 
 # Expose port
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Start the app (standalone mode)
+CMD ["node", ".next/standalone/server.js"]
