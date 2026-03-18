@@ -25,5 +25,10 @@ RUN cp -r .next/static .next/standalone/.next/ 2>/dev/null || true
 # Expose port
 EXPOSE 3000
 
+# Set environment
+ENV PORT=3000
+ENV NODE_ENV=production
+
 # Start the app (standalone mode)
-CMD ["node", ".next/standalone/server.js"]
+WORKDIR /app/.next/standalone
+CMD ["node", "server.js"]
