@@ -1,10 +1,10 @@
-# Railway Docker deployment
+# Railway Docker deployment - Skip Prisma generate, use pre-built client
 FROM node:18-slim
 
 WORKDIR /app
 
-# Install dependencies for Prisma
-RUN apt-get update && apt-get install -y openssl
+# Install openssl for Prisma runtime
+RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
@@ -12,16 +12,10 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy all files
+# Copy all files (includes pre-generated Prisma client)
 COPY . .
 
-# Set dummy DB URL for Prisma generate
-ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
-
-# Generate Prisma client
-RUN cd prisma && npx prisma generate --schema=schema.prisma
-
-# Build the app
+# Build the app (without Prisma generate)
 RUN npm run build
 
 # Expose port
