@@ -15,22 +15,14 @@ RUN npm install
 # Copy all files
 COPY . .
 
-# Build the app (standalone output)
+# Build the app
 RUN npm run build
-
-# Copy static files to standalone
-RUN cp -r public .next/standalone/ 2>/dev/null || true
-RUN cp -r .next/static .next/standalone/.next/ 2>/dev/null || true
-
-# Make start script executable
-RUN chmod +x start.sh
 
 # Expose port
 EXPOSE 3000
 
 # Set environment
-ENV PORT=3000
 ENV NODE_ENV=production
 
 # Start the app
-CMD ["./start.sh"]
+CMD ["npm", "start"]
