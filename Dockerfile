@@ -15,14 +15,11 @@ RUN npm install
 # Copy all files
 COPY . .
 
-# Set dummy DATABASE_URL for Prisma generate (runtime will use actual env)
-ENV DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy"
-
-# Generate Prisma client
-RUN npx prisma generate
-
-# Build the app
+# Build the app (skip prisma generate, will do at runtime)
 RUN npm run build
+
+# Make entrypoint executable
+RUN chmod +x docker-entrypoint.sh
 
 # Expose port
 EXPOSE 3000
@@ -31,4 +28,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Start the app
-CMD npm start
+ENTRYPOINT ["./docker-entrypoint.sh"]
