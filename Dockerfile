@@ -25,4 +25,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Start the app
-CMD ["npm", "start"]
+CMD npm start
