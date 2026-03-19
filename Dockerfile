@@ -15,6 +15,9 @@ RUN npm install
 # Copy all files
 COPY . .
 
+# Generate Prisma client
+RUN npx prisma generate
+
 # Build the app
 RUN npm run build
 
