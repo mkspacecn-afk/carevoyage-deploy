@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "node custom-server.js",
+    "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
