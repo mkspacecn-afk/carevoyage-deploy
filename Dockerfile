@@ -15,17 +15,15 @@ RUN npm install
 # Copy all files
 COPY . .
 
-# Build the app (skip prisma generate, will do at runtime)
+# Skip prisma, just build
 RUN npm run build
-
-# Make entrypoint executable
-RUN chmod +x docker-entrypoint.sh
 
 # Expose port
 EXPOSE 3000
 
 # Set environment
 ENV NODE_ENV=production
+ENV PORT=3000
 
 # Start the app
-ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["npm", "start"]
